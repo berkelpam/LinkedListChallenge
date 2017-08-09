@@ -11,7 +11,7 @@ public class Album {
 
     public Album(String title) {
         this.title = title;
-        this.songs = new ArrayList<Song>(songs);
+        this.songs = new ArrayList<Song>();
     }
 
     public String getTitle() {
@@ -25,7 +25,7 @@ public class Album {
 
     public boolean addSong(String title, double duration){
         if (!existingSong(title)){
-        return this.songs.add(new Song((title,duration));
+        return this.songs.add(new Song(title,duration));
         }
         return false;
     }
@@ -38,5 +38,15 @@ public class Album {
 
         }
         return false;
+    }
+
+    public  Song getSong(String title){
+        for (int i = 0; i <songs.size() ; i++) {
+            if (songs.get(i).getTitle().equals(title)){
+                return songs.get(i);
+            }
+
+        }
+        return null;
     }
 }
