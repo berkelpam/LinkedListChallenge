@@ -27,8 +27,8 @@ public class Main {
 
         //displayList(playList);
         Once.listSongs();
-        Once.addToPlayList(3,playList);
-        Once.addToPlayList("Even flow",playList);
+        Once.addToPlayList(3, playList);
+        Once.addToPlayList("Even flow", playList);
         playPlaylist(playList);
 
 
@@ -89,17 +89,35 @@ public class Main {
 
                 case 1:
                     //replay current song
-                    if (!forward) {
+//                    if (!forward) {
+//                        if (listoperator.hasNext()) {
+//                            listoperator.next();
+//                            forward = true;
+//                        }
+//                    }
+//                    if (listoperator.hasNext()) {
+//                        System.out.println("Now playing: " + listoperator.next().getTitle());
+//                    } else {
+//                        System.out.println("End of the playlist reached.");
+//                    }
+                    // solution tim:
+                    if (forward) {
+                        if (listoperator.hasPrevious()) {
+                            System.out.println("Now re-playing " + listoperator.previous().toString());
+                            forward = false;
+                        } else {
+                            System.out.println("Reached the beginning of the list.");
+                        }
+                    } else {
                         if (listoperator.hasNext()) {
-                            listoperator.next();
+                            System.out.printf("Now re-playing: " + listoperator.next().toString());
                             forward = true;
+                        } else {
+                            System.out.println("Reached the beginning of the list.");
                         }
                     }
-                    if (listoperator.hasNext()) {
-                        System.out.println("Now playing: " + listoperator.next().getTitle());
-                    } else {
-                        System.out.println("End of the playlist reached.");
-                    }
+
+
                     break;
                 case 2:
                     //next song
@@ -138,20 +156,30 @@ public class Main {
                     //listoperator.remove();
                     //listoperator.next();
 
-                    if (forward) {
-                        listoperator.previous();
-                        forward = false;
-                    }
-                    if (listoperator.hasPrevious()) {
-                        listoperator.previous();
-                        System.out.println("Remove song: " + listoperator.next().getTitle());
+//                    if (forward) {
+//                        listoperator.previous();
+//                        forward = false;
+//                    }
+//                    if (listoperator.hasPrevious()) {
+//                        listoperator.previous();
+//                        System.out.println("Remove song: " + listoperator.next().getTitle());
+//                        listoperator.remove();
+//                    } else {
+//                        listoperator.next();
+//                        listoperator.previous();
+//                        System.out.println("Remove song: " + listoperator.next().getTitle());
+//                        listoperator.remove();
+//                    }
+                    //solution tim:
+                    if (playlist.size() > 0) {
                         listoperator.remove();
-                    } else {
-                        listoperator.next();
-                        listoperator.previous();
-                        System.out.println("Remove song: " + listoperator.next().getTitle());
-                        listoperator.remove();
+                        if (listoperator.hasNext()) {
+                            System.out.println("Now playing: " + listoperator.next().toString());
+                        } else if (listoperator.hasPrevious()) {
+                            System.out.println("Now playing " + listoperator.previous().toString());
+                        }
                     }
+
 
                     break;
 
