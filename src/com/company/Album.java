@@ -49,4 +49,14 @@ public class Album {
         }
         return null;
     }
+
+    //additional example on fori loop
+    private Song findSong(String title){
+        for (Song checkedSong:this.songs) {
+            if (checkedSong.getTitle().equals(title))
+                return checkedSong;
+            
+        }
+        return null;
+    }
 }
