@@ -25,9 +25,9 @@ public class Main {
         addSongToPlaylist(playList, Jump.getSong("Frozen"));
         addSongToPlaylist(playList, Jump.getSong("Even"));
 
-        displayList(playList);
+        //displayList(playList);
 
-         playPlaylist(playList);
+        playPlaylist(playList);
 
 
     }
@@ -72,6 +72,7 @@ public class Main {
         if (playlist.isEmpty()) {
             System.out.println("No songs to play");
         } else {
+
             System.out.println("Now playing: " + listoperator.next().getTitle());
             displayMenu();
         }
@@ -87,28 +88,30 @@ public class Main {
                 case 1:
                     //replay current song
                     if (!forward) {
-                        listoperator.next();
-                        forward = true;
+                        if (listoperator.hasNext()) {
+                            listoperator.next();
+                            forward = true;
+                        }
                     }
                     if (listoperator.hasNext()) {
-                        listoperator.previous();
                         System.out.println("Now playing: " + listoperator.next().getTitle());
-                    }
-                    else{
+                    } else {
                         System.out.println("End of the playlist reached.");
                     }
                     break;
                 case 2:
                     //next song
                     if (!forward) {
-                        listoperator.next();
-                        forward = true;
+                        if (listoperator.hasNext()) {
+                            listoperator.next();
+                            forward = true;
+                        }
                     }
                     if (listoperator.hasNext()) {
                         System.out.println("Now playing: " + listoperator.next().getTitle());
-                    }
-                    else{
+                    } else {
                         System.out.println("End of the playlist reached.");
+                        forward = false;
                     }
                     break;
 
@@ -121,9 +124,37 @@ public class Main {
                     if (listoperator.hasPrevious()) {
                         System.out.println("Now playing: " + listoperator.previous().getTitle());
 
-                    }else{
+                    } else {
                         System.out.println("Beginning of the playlist reached.");
+                        forward = true;
                     }
+                    break;
+                case 4:
+                    //remove song from list
+                    //System.out.println("Removed " + listoperator.+ " from playlist.");
+
+                    //listoperator.remove();
+                    //listoperator.next();
+
+                    if (forward) {
+                        listoperator.previous();
+                        forward = false;
+                    }
+                    if (listoperator.hasPrevious()) {
+                        listoperator.previous();
+                        System.out.println("Remove song: " + listoperator.next().getTitle());
+                        listoperator.remove();
+                    } else {
+                        listoperator.next();
+                        listoperator.previous();
+                        System.out.println("Remove song: " + listoperator.next().getTitle());
+                        listoperator.remove();
+                    }
+
+                    break;
+
+                case 8:
+                    displayList(playlist);
                     break;
 
 
@@ -142,6 +173,8 @@ public class Main {
         System.out.println("1 - replay song\n");
         System.out.println("2 - next song\n");
         System.out.println("3 - previous song\n");
+        System.out.println("4 - remove song\n");
+        System.out.println("8 - display songlist\n");
         System.out.println("9 - quit\n");
         System.out.println("Your choide:");
     }
