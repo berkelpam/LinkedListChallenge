@@ -26,7 +26,9 @@ public class Main {
         addSongToPlaylist(playList, Jump.getSong("Even"));
 
         //displayList(playList);
-
+        Once.listSongs();
+        Once.addToPlayList(3,playList);
+        Once.addToPlayList("Even flow",playList);
         playPlaylist(playList);
 
 
